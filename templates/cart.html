@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart - Z Wheels</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f5f5f5;
+            color: #222;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        /* Cart Box */
+        .cart-box {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        /* Title */
+        .cart-title {
+            text-align: center;
+            color: #111;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* Cart Items */
+        .cart-item {
+            background: #fafafa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Price */
+        .price {
+            color: #e60000;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* Button */
+        .btn-hot {
+            background: #ff4d4d;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            padding: 10px 25px;
+            transition: 0.3s;
+        }
+
+        .btn-hot:hover {
+            background: #cc0000;
+        }
+
+        /* Total */
+        .total-box {
+            text-align: right;
+            margin-top: 25px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar d-flex justify-content-between px-4">
+    <div class="logo">Z WHEELS</div>
+    <a href="/" class="btn btn-hot">Continue Shopping</a>
+</nav>
+
+<!-- Cart Section -->
+<div class="cart-box">
+
+    <h2 class="cart-title">Your Cart</h2>
+
+    {% if items %}
+
+        {% for item in items %}
+        <div class="cart-item d-flex justify-content-between align-items-center">
+            <div>
+                <h5>{{ item.product.name }}</h5>
+                <p class="mb-0">Quantity: {{ item.quantity }}</p>
+            </div>
+
+            <div class="price">
+                ₹{{ item.product.price }}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="total-box">
+            Total: ₹{{ total }}
+        </div>
+
+        <div class="text-end mt-4">
+            <a href="/checkout/" class="btn btn-hot">Proceed to Checkout</a>
+        </div>
+
+    {% else %}
+
+        <div class="empty-cart">
+            <h4>Your cart is empty</h4>
+            <p>Add products to continue shopping</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
